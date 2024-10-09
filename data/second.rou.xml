@@ -1,11 +1,15 @@
 <routes>
-<vType id="car" length="5.0"  accel= "1.5" decel= "5.0" sigma="0.0" maxSpeed= "150.0" color= "0,1,0" />
+<vType id="car" length="5.0"  accel= "1.1" decel= "5.0" sigma="0.0" maxSpeed= "600.0" color= "0,1,0" />
+<vType id="slow-car" length="5.0"  accel= "0.1" decel= "5.0" sigma="0.0" maxSpeed= "5.0" color= "0,1,0" />
     <route id="right2left-traffic" edges="1to2r outr" />
     <route id="left2right-traffic" edges="1to2l outl" />
 
-    <vehicle depart="1" id="veh0" route="right2left-traffic" type="car" />
-    <vehicle depart="1" id="veh1" route="left2right-traffic" type="car" />
-    <vehicle depart="1" id="veh2" route="left2right-traffic" type="car" />
-    <vehicle depart="1" id="veh3" route="left2right-traffic" type="car" />
+    <vehicle depart="1" id="veh0" route="right2left-traffic" type="car"/>
+    <vehicle depart="1" id="veh1" route="right2left-traffic" type="slow-car"/>
+    <vehicle depart="1" id="veh2" route="right2left-traffic" type="car"/>
+    <vehicle depart="1" id="veh3" route="left2right-traffic" type="slow-car" departLane="0" speedFactor="0.1" departSpeed="2" />
+    <vehicle depart="1" id="veh4" route="left2right-traffic" type="slow-car" departLane="1" speedFactor="0.1" departSpeed="2" />
+    <vehicle depart="1" id="veh5" route="left2right-traffic" type="slow-car" departLane="2" speedFactor="0.1" departSpeed="2" />
+    <vehicle depart="100" id="veh6" route="left2right-traffic" type="car" departLane="0" departSpeed="15" />
 </routes>
 
