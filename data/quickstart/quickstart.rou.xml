@@ -1,0 +1,15 @@
+<routes>
+<vType id="car" length="5.0"  accel= "1.1" decel= "5.0" sigma="0.0" maxSpeed= "600.0" color= "0,1,0" />
+<vType id="slow-car" length="5.0"  accel= "0.1" decel= "5.0" sigma="0.0" maxSpeed= "5.0" color= "0,1,0" />
+    <route id="D1-traffic" edges="D2 L2 L12" />
+<!--    <route id="left2right-traffic" edges="1_0 912_0" />-->
+
+    <vehicle depart="1" id="veh0" route="D1-traffic" type="car"/>
+    <vehicle depart="1" id="veh1" route="D1-traffic" type="slow-car"/>
+    <vehicle depart="1" id="veh2" route="D1-traffic" type="car"/>
+    <vehicle depart="1" id="veh3" route="D1-traffic" type="slow-car" departLane="0" speedFactor="0.1" departSpeed="2" />
+    <vehicle depart="1" id="veh4" route="D1-traffic" type="slow-car" departLane="1" speedFactor="0.1" departSpeed="2" />
+    <vehicle depart="1" id="veh5" route="D1-traffic" type="slow-car" departLane="1" speedFactor="0.1" departSpeed="2" />
+    <vehicle depart="100" id="veh6" route="D1-traffic" type="car" departLane="0" departSpeed="15" />
+</routes>
+
