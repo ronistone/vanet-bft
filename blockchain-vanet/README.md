@@ -1,6 +1,3 @@
-Here’s a `README.md` file for your project, explaining the code structure, usage, and purpose.
-
----
 
 # VANET Blockchain Consensus Simulation
 
