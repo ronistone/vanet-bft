@@ -1,8 +1,9 @@
 from blockchain import Blockchain, Block
 from block_consensus import consensus_fault_tolerant_block
 
-def create_vanet_blockchains():
+def generate_dummy_vanet_blockchains():
     blockchain_dict = {}
+    # generates 5 blockchains
     for i in range(5):
         blockchain = Blockchain()
 
@@ -20,12 +21,13 @@ def create_vanet_blockchains():
     scores = [f"Car_6: I'm malicious"]
     initial_block = Block(scores=scores)
     byzantine_blockchain.add_block(initial_block)
-    blockchain_dict[4] = byzantine_blockchain  # replace by the byzantine block
+    # replace by a byzantine block
+    blockchain_dict[4] = byzantine_blockchain  
 
     return blockchain_dict
 
-def driver():
-    blockchain_dict = create_vanet_blockchains()
+def test_blockchain_consensus():
+    blockchain_dict = generate_dummy_vanet_blockchains()
     agreed_blockchain = consensus_fault_tolerant_block(blockchain_dict)
     if agreed_blockchain:
         print("Agreed Blockchain:")
@@ -38,6 +40,6 @@ def driver():
     else:
         print("No consensus could be reached.")
 
-# Run the driver function
 if __name__ == "__main__":
-    driver()
+    test_blockchain_consensus()
+
