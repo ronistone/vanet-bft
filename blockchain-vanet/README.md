@@ -13,7 +13,7 @@ project_directory/
 ├── blockchain.py           # Defines the Blockchain and Block classes
 ├── consensus.py            # Implements the voting and scoring consensus logic
 ├── block_consensus.py      # Implements fault-tolerant consensus for multiple blockchains
-├── main.py                 # Driver code to simulate VANET consensus with one Byzantine blockchain
+├── test.py                 # Test code to simulate VANET consensus with one Byzantine blockchain
 └── README.md               # Project overview and usage instructions
 ```
 
@@ -22,14 +22,14 @@ project_directory/
 - **blockchain.py**: Contains the `Blockchain` and `Block` classes. Each car’s scores are recorded in blocks added to the blockchain.
 - **consensus.py**: Defines `consensus_fault_tolerant` to calculate the final voting scores and reach consensus among cars on individual scores.
 - **block_consensus.py**: Contains the `consensus_fault_tolerant_block` function, which identifies and selects the most common blockchain among cars in the VANET. This module handles discrepancies from Byzantine nodes.
-- **main.py**: The driver code that initializes 5 blockchains, introduces one Byzantine (malicious) blockchain, and uses consensus to reach an agreement on the correct blockchain. This code demonstrates the overall functionality of the system.
+- **test.py**: The driver code that initializes 5 blockchains, introduces one Byzantine (malicious) blockchain, and uses consensus to reach an agreement on the correct blockchain. This code demonstrates the overall functionality of the system.
 
 ## Usage
 
-To run the simulation, ensure that all files are in the same directory, then run `main.py`:
+To run the simulation, ensure that all files are in the same directory, then run `test.py`:
 
 ```bash
-python main.py
+python test.py
 ```
 
 This script will:
@@ -66,4 +66,4 @@ Hash: <hash>
 
 1. **Voting Consensus** (`consensus_fault_tolerant` in `consensus.py`): Each car in the network votes on scores for other cars. The most common scores are determined through a fault-tolerant algorithm, creating a set of final scores.
 2. **Blockchain Consensus** (`consensus_fault_tolerant_block` in `block_consensus.py`): Each car maintains a local copy of the blockchain. This function ensures that, after each voting round, all cars adopt the most common blockchain version, preventing a single Byzantine car from corrupting the network state.
-3. **Simulation** (`driver` in `main.py`): Demonstrates how the consensus functions work in practice by simulating a VANET with five cars and one Byzantine car.
+3. **Simulation** (`driver` in `test.py`): Demonstrates how the consensus functions work in practice by simulating a VANET with five cars and one Byzantine car.
