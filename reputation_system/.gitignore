@@ -1,0 +1,4 @@
+simulations/results
+out/
+*/__pycache__/
+
