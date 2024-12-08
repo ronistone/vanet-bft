@@ -10,6 +10,7 @@ namespace veins {
 class VEINS_API ReputationCar : public DemoBaseApplLayer {
 public:
     void initialize(int stage) override;
+    void finish() override;
 
 private:
     std::map<unsigned long, std::vector<Block>*> nextBlock;
@@ -21,6 +22,7 @@ protected:
     bool sentMessage;
     int currentSubscribedServiceId;
     uint32_t receivedRm;
+    uint32_t chainSize;
 
 protected:
     void onRM(ReputationMessage* msg);

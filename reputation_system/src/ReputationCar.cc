@@ -10,6 +10,17 @@ using namespace veins;
 
 Define_Module(veins::ReputationCar);
 
+
+
+
+void ReputationCar::finish() {
+    DemoBaseApplLayer::finish();
+    recordScalar("receivedRm", receivedRm);
+    recordScalar("chainSize", blockChain.size());
+    recordScalar("chainLastHash", blockChain.back().getHash());
+    recordScalar("chainFirstHash", blockChain.size() > 1? blockChain[1].getHash():blockChain[0].getHash());
+}
+
 void ReputationCar::initialize(int stage)
 {
     DemoBaseApplLayer::initialize(stage);
@@ -24,7 +35,7 @@ void ReputationCar::initialize(int stage)
 unsigned long ReputationCar::calculateHash(Block block) {
     unsigned long hash = 0;
     for(int repu=0;repu < block.getReputationArraySize(); repu++){
-        hash += block.getReputation(repu) * 31;
+        hash += (repu+1) * block.getReputation(repu) * 31;
     }
     hash += block.getLast_hash() * 31;
     return hash;
@@ -115,7 +126,7 @@ void ReputationCar::onWSM(BaseFrame1609_4* frame)
         wsm->setSerial(3);
         scheduleAt(simTime() + 2 + uniform(0.01, 0.2), wsm->dup());
     }
-    sendReputationMessage(createBlock(&blockChain.back(), wsm->getPsid(), 1), 0.5 + uniform(0.1, 0.2));
+    sendReputationMessage(createBlock(&blockChain.back(), wsm->getSenderAddress(), 1), 0.5 + uniform(0.1, 0.2));
     std::cout << "Received a WSM" << endl;
     EV << "Received a WSM" << endl;
 }
@@ -196,7 +207,7 @@ void ReputationCar::handleSelfMsg(cMessage* msg)
         // send this message on the service channel until the counter is 3 or higher.
         // this code only runs when channel switching is enabled
         EV << "Receive Message with serial " << wsm->getSerial() << endl;
-        sendReputationMessage(createBlock(&blockChain.back(), wsm->getPsid(), 1), 0.5 + uniform(0.1, 0.2));
+        sendReputationMessage(createBlock(&blockChain.back(), wsm->getSenderAddress(), 1), 0.5 + uniform(0.1, 0.2));
         sendDown(wsm->dup());
         wsm->setSerial(wsm->getSerial() + 1);
         if (wsm->getSerial() >= 3) {
@@ -231,6 +242,7 @@ void ReputationCar::handlePositionUpdate(cObject* obj)
             TraCIDemo11pMessage* wsm = new TraCIDemo11pMessage();
             populateWSM(wsm);
             wsm->setDemoData(mobility->getRoadId().c_str());
+            wsm->setSenderAddress(myId);
 
             // host is standing still due to crash
             if (dataOnSch) {
